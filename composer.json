@@ -8,6 +8,9 @@
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
+        "symfony/maker-bundle": "^1.1",
+        "symfony/orm-pack": "^1.0",
+        "symfony/twig-bundle": "^4.0",
         "symfony/yaml": "^4.0"
     },
     "require-dev": {
@@ -18,7 +21,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "ext-mongo": "1.6.16"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +60,7 @@
     "extra": {
         "symfony": {
             "id": "01C6294J5G9MNB9RW1AWAGCR9S",
-            "allow-contrib": false
+            "allow-contrib": "true"
         }
     }
 }

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row">
+    {% for post in posts %}
+        <div class="col-12 blog-post">
+            <div class="">
+                <h2 class="blog-post-title"><a href="{{ post.url }}" class="text-dark">{{ post.title }}</a></h2>
+
+                <p class="blog-post-meta">
+                    {{ post.pubDate|date }}
+                </p>
+
+                <a href="{{ post.url }}">Continue reading...</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+app:
+  feeds:
+    id: iamcodeguru
+    feedUrl: http://iamcode.guru/feed
+    name: I Am Code Guru
+    author: Bartłomiej Kiełbasa
+    twitter: https://twitter.com/kabanek
+    facebook: https://www.facebook.com/iamcodeguru/

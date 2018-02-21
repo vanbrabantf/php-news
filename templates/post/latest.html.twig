@@ -8,7 +8,7 @@
                 <h2 class="blog-post-title"><a href="{{ post.url }}" class="text-dark">{{ post.title }}</a></h2>
 
                 <p class="blog-post-meta">
-                    {{ post.pubDate|date }}
+                    {{ post.pubDate|date }} by {{ post.blogId }}
                 </p>
 
                 <a href="{{ post.url }}">Continue reading...</a>

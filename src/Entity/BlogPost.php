@@ -116,9 +116,9 @@ class BlogPost
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeImmutable
      */
-    public function getPubDate()
+    public function getPubDate(): \DateTimeImmutable
     {
         return $this->pubDate;
     }
@@ -126,7 +126,7 @@ class BlogPost
     /**
      * @param mixed $pubDate
      */
-    public function setPubDate($pubDate): void
+    public function setPubDate(\DateTimeImmutable $pubDate): void
     {
         $this->pubDate = $pubDate;
     }

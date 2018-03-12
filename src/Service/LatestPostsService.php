@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\BlogPost;
 use App\Repository\BlogPostRepository;
 
 class LatestPostsService
@@ -20,8 +21,11 @@ class LatestPostsService
         $this->repository = $repository;
     }
 
+    /**
+     * @return BlogPost[]
+     */
     public function get()
     {
-        return $this->repository->findAll();
+        return $this->repository->findOrdered();
     }
 }

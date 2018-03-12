@@ -30,3 +30,10 @@ services:
         - "%feeds%"
         - "@doctrine.orm.entity_manager"
       public: true
+
+    App\Service\RssGeneratorService:
+      arguments:
+        - 'PHP News'
+        - "It's a place where interesting things happens"
+        - 'https://php-news/feed/rss2'
+        - '@App\Service\LatestPostsService'

@@ -1,3 +1,7 @@
 homepage:
-    path: /
-    controller: App\Controller\LatestPostsController::index
+  path: /
+  controller: App\Controller\LatestPostsController::index
+
+rss2:
+  path: /feed/rss2
+  controller: App\Controller\FeedsController::rss2

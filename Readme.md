@@ -1,7 +1,7 @@
 PHP News
 ======
 
-It's a source code for website: http://phpnews.com.
+It's a source code for website: https://php-news.com.
 
 # What's the purpose?
 

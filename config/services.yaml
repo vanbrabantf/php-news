@@ -37,3 +37,17 @@ services:
         - "It's a place where interesting things happens"
         - 'https://php-news/feed/rss2'
         - '@App\Service\LatestPostsService'
+
+    App\Service\AuthorInfoService:
+      arguments:
+        - "%feeds%"
+
+    App\Service\Edition\CreatorService:
+      arguments:
+        - '@App\Service\UnPublishedBlogPostsService'
+        - '@App\Service\AuthorInfoService'
+        - "@doctrine.orm.entity_manager"
+        - '@event_dispatcher'
+
+    App\Repository\EditionRepository:
+      public: true

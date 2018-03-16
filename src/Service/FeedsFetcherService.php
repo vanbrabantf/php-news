@@ -48,7 +48,7 @@ class FeedsFetcherService
     public function addEntry($entry, $blogId): void
     {
         $pubDate = new \DateTimeImmutable((string)$entry->pubDate);
-        $post = new BlogPost($entry->title, $blogId, $entry->link, $pubDate);
+        $post = new BlogPost($entry->title, $blogId, $entry->link, $pubDate,null);
 
         try {
             $this->em->persist($post);

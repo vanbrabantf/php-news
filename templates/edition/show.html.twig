@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12">
+            <h2>{{ edition.name }}</h2>
+
+            <hr />
+
+            <h3>Posts in the edition</h3>
+
+            <ul>
+                {% for post in edition.getBlogPosts %}
+                    <li><a href="{{ post.url }}"> {{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

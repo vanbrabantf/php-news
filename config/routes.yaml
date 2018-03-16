@@ -5,3 +5,7 @@ homepage:
 rss2:
   path: /feed/rss2
   controller: App\Controller\FeedsController::rss2
+
+edition_show:
+  path: /edition/{editionId}
+  controller: App\Controller\EditionController::show

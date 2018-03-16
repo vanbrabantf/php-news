@@ -37,18 +37,29 @@ class BlogPost
     private $pubDate;
 
     /**
+     * @var Edition|null
+     * @ORM\ManyToOne(targetEntity="App\Entity\Edition", inversedBy="blogPosts")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $edition;
+
+    /**
      * BlogPost constructor.
+     * @param $id
      * @param $title
      * @param $blogId
      * @param $url
      * @param $pubDate
+     * @param Edition $edition
      */
-    public function __construct($title, $blogId, $url, $pubDate)
+    public function __construct($id, $title, $blogId, $url, $pubDate, Edition $edition = null)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->blogId = $blogId;
         $this->url = $url;
         $this->pubDate = $pubDate;
+        $this->edition = $edition;
     }
 
     /**
@@ -129,5 +140,13 @@ class BlogPost
     public function setPubDate(\DateTimeImmutable $pubDate): void
     {
         $this->pubDate = $pubDate;
+    }
+
+    /**
+     * @return Edition
+     */
+    public function getEdition(): Edition
+    {
+        return $this->edition;
     }
 }

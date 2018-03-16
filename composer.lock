@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e440b18f393b1ab600d2a6565980c2d",
+    "content-hash": "ffe8e9cf3c05e59380a3b4baa0a7063c",
     "packages": [
         {
             "name": "bhaktaraz/php-rss-generator",

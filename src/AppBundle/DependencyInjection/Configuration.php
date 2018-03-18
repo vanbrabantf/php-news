@@ -21,17 +21,26 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('feeds')
+                    ->prototype('array')
+                            ->children()
+                                ->scalarNode('id')->isRequired()->end()
+                                ->scalarNode('feedUrl')->isRequired()->end()
+                                ->scalarNode('name')->isRequired()->end()
+                                ->scalarNode('author')->isRequired()->end()
+                                ->scalarNode('twitter')->end()
+                                ->scalarNode('facebook')->end()
+                            ->end()
+                    ->end()
+                ->end() // feeds
+                ->arrayNode('twitter')
                     ->children()
-                        ->scalarNode('id')->isRequired()->end()
-                        ->scalarNode('feedUrl')->isRequired()->end()
-                        ->scalarNode('name')->isRequired()->end()
-                        ->scalarNode('author')->isRequired()->end()
-                        ->scalarNode('twitter')->end()
-                        ->scalarNode('facebook')->end()
+                        ->scalarNode('consumerKey')->end()
+                        ->scalarNode('consumerSecret')->end()
+                        ->scalarNode('oauthToken')->end()
+                        ->scalarNode('oauthSecret')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
 
         return $treeBuilder;
     }

@@ -1,9 +1,14 @@
 app:
+  twitter:
+    consumerKey: '%env(TWITTER_CONSUMER_KEY)%'
+    consumerSecret: '%env(TWITTER_CONSUMER_SECRET)%'
+    oauthToken: '%env(TWITTER_OAUTH_TOKEN)%'
+    oauthSecret: '%env(TWITTER_OAUTH_SECRET)%'
 
   feeds:
-    id: iamcodeguru
-    feedUrl: http://iamcode.guru/feed
-    name: I Am Code Guru
-    author: Bartłomiej Kiełbasa
-    twitter: https://twitter.com/kabanek
-    facebook: https://www.facebook.com/iamcodeguru/
+    - id: iamcodeguru
+      feedUrl: http://iamcode.guru/feed
+      name: I Am Code Guru
+      author: Bartłomiej Kiełbasa
+      twitter: https://twitter.com/kabanek
+      facebook: https://www.facebook.com/iamcodeguru/

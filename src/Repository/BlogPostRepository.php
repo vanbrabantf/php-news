@@ -39,7 +39,6 @@ class BlogPostRepository extends ServiceEntityRepository
             ->where('b.edition IS NULL')
             ->setMaxResults($limit)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 }

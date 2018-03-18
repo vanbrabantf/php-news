@@ -26,7 +26,21 @@ class BlogPostRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
+    /**
+     * @param int $limit
+     * @return BlogPost[]
+     */
+    public function finNotPublished($limit = 30)
+    {
+        return $this->createQueryBuilder('b')
+            ->orderBy('b.pubDate', 'DESC')
+            ->where('b.edition IS NULL')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

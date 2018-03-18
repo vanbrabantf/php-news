@@ -35,9 +35,11 @@ class Edition
      */
     private $blogPosts;
 
-    public function __construct()
+    public function __construct(string $name)
     {
         $this->blogPosts = new ArrayCollection();
+        $this->name = $name;
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     /**

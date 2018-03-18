@@ -45,16 +45,14 @@ class BlogPost
 
     /**
      * BlogPost constructor.
-     * @param $id
      * @param $title
      * @param $blogId
      * @param $url
      * @param $pubDate
      * @param Edition $edition
      */
-    public function __construct($id, $title, $blogId, $url, $pubDate, Edition $edition = null)
+    public function __construct($title, $blogId, $url, \DateTimeImmutable $pubDate, ?Edition $edition = null)
     {
-        $this->id = $id;
         $this->title = $title;
         $this->blogId = $blogId;
         $this->url = $url;
@@ -148,5 +146,13 @@ class BlogPost
     public function getEdition(): Edition
     {
         return $this->edition;
+    }
+
+    /**
+     * @param Edition|null $edition
+     */
+    public function setEdition(?Edition $edition): void
+    {
+        $this->edition = $edition;
     }
 }

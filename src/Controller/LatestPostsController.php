@@ -26,6 +26,6 @@ class LatestPostsController extends Controller
     {
         $posts = $this->latestPosts->get();
 
-        return $this->render('post/latest.html.twig', array('posts' => $posts));;
+        return $this->render('post/latest.html.twig', array('posts' => $posts));
     }
 }

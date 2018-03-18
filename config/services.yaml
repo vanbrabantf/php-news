@@ -48,3 +48,6 @@ services:
         - '@App\Service\AuthorInfoService'
         - "@doctrine.orm.entity_manager"
         - '@event_dispatcher'
+
+    App\Repository\EditionRepository:
+      public: true

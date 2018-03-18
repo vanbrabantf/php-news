@@ -19,16 +19,27 @@ class EditionRepository extends ServiceEntityRepository
         parent::__construct($registry, Edition::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findAllOrdered()
     {
         return $this->createQueryBuilder('e')
-            ->where('e.something = :value')->setParameter('value', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('e.id', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
+    /**
+     * @param int $editionId
+     * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findWithPosts(int $editionId)
+    {
+        return $this->createQueryBuilder('e')
+            ->join('e.blogPosts', 'blogPosts')
+            ->where('e.id = :id')
+            ->setParameter('id', $editionId)
+            ->getQuery()
+            ->getSingleResult();
+    }
 }

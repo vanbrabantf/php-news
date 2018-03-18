@@ -1,4 +1,7 @@
 {
+    "abraham/twitteroauth": {
+        "version": "0.7.4"
+    },
     "bhaktaraz/php-rss-generator": {
         "version": "dev-master"
     },

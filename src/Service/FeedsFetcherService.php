@@ -39,13 +39,17 @@ class FeedsFetcherService
             $output->writeln(sprintf('Fetching blog posts from <info>%s</info>', $blogId));
             $postsAdded = 0;
 
-            if (is_array($xml->channel->item)) {
-                foreach($xml->channel->item as $entry) {
-                    $postsAdded += $this->addEntry($entry, $blogId);
+            if ($xml->channel->item instanceof \SimpleXMLElement) {
+                $output->writeln(sprintf('Found <info>%s</info> entries', count($xml->channel->item)));
+
+                foreach ($xml->channel->item as $entry) {
+                    $postsAdded += $this->addRss2Entry($entry, $blogId);
                 }
             } else {
-                if ($xml->channel->item instanceof \SimpleXMLElement) {
-                    $postsAdded += $this->addEntry($xml->channel->item, $blogId);
+                $output->writeln(sprintf('Found <info>%s</info> entries', count($xml->entry)));
+
+                foreach ($xml->entry as $entry) {
+                    $postsAdded += $this->addAtomEntry($entry, $blogId);
                 }
             }
 
@@ -58,11 +62,11 @@ class FeedsFetcherService
      * @param $blogId
      * @return int
      */
-    public function addEntry($entry, $blogId): int
+    public function addRss2Entry($entry, $blogId): int
     {
         $found = $this->em->getRepository(BlogPost::class)
             ->findBy([
-                'url' => $entry->link,
+                'url' => (string)$entry->link,
             ]);
 
         if (count($found)) {
@@ -70,13 +74,41 @@ class FeedsFetcherService
         }
 
         $pubDate = new \DateTimeImmutable((string)$entry->pubDate);
-        $post = new BlogPost($entry->title, $blogId, $entry->link, $pubDate,null);
+        $post = new BlogPost((string)$entry->title, $blogId, (string)$entry->link, $pubDate,null);
 
         try {
             $this->em->persist($post);
             $this->em->flush();
             return 1;
         } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+
+        return 0;
+    }
+
+    public function addAtomEntry($entry, $blogId): int
+    {
+        $link = (string)$entry->link['href'];
+
+        $found = $this->em->getRepository(BlogPost::class)
+            ->findBy([
+                'url' => $link,
+            ]);
+
+        if (count($found)) {
+            return 0;
+        }
+
+        $pubDate = new \DateTimeImmutable((string)$entry->pubDate);
+        $post = new BlogPost((string)$entry->title, $blogId, $link, $pubDate,null);
+
+        try {
+            $this->em->persist($post);
+            $this->em->flush();
+            return 1;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
         }
 
         return 0;

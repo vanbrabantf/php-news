@@ -20,6 +20,6 @@ class FetchCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $fetcher = $this->getContainer()->get(FeedsFetcherService::class);
-        $fetcher->start();
+        $fetcher->start($output);
     }
 }

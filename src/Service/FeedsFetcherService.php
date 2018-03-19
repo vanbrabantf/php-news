@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\BlogPost;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class FeedsFetcherService
 {
@@ -28,32 +29,36 @@ class FeedsFetcherService
         $this->em = $em;
     }
 
-    public function start()
+    public function start(OutputInterface $output)
     {
         foreach ($this->feeds as $feed) {
             $content = file_get_contents($feed['feedUrl']);
             $xml = new \SimpleXmlElement($content);
             $blogId = $feed['id'];
 
-            if (!is_array($xml->channel->item)) {
-                if ($xml->channel->item instanceof \SimpleXMLElement) {
-                    $this->addEntry($xml->channel->item, $blogId);
+            $output->writeln(sprintf('Fetching blog posts from <info>%s</info>', $blogId));
+            $postsAdded = 0;
+
+            if (is_array($xml->channel->item)) {
+                foreach($xml->channel->item as $entry) {
+                    $postsAdded += $this->addEntry($entry, $blogId);
                 }
-
-                continue;
+            } else {
+                if ($xml->channel->item instanceof \SimpleXMLElement) {
+                    $postsAdded += $this->addEntry($xml->channel->item, $blogId);
+                }
             }
 
-            foreach($xml->channel->item as $entry) {
-                $this->addEntry($entry, $blogId);
-            }
+            $output->writeln(sprintf('Added %s posts', $postsAdded));
         }
     }
 
     /**
      * @param $entry
      * @param $blogId
+     * @return int
      */
-    public function addEntry($entry, $blogId): void
+    public function addEntry($entry, $blogId): int
     {
         $found = $this->em->getRepository(BlogPost::class)
             ->findBy([
@@ -61,7 +66,7 @@ class FeedsFetcherService
             ]);
 
         if (count($found)) {
-            return;
+            return 0;
         }
 
         $pubDate = new \DateTimeImmutable((string)$entry->pubDate);
@@ -70,7 +75,10 @@ class FeedsFetcherService
         try {
             $this->em->persist($post);
             $this->em->flush();
+            return 1;
         } catch (\Exception $e) {
         }
+
+        return 0;
     }
 }

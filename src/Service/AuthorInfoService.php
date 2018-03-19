@@ -27,7 +27,7 @@ class AuthorInfoService
                 continue;
             }
 
-            return new Author($feed['author'], $feed['twitter'], $feed['facebook']);
+            return new Author($feed['author'], @$feed['twitter'], @$feed['facebook']);
         }
 
         throw new \InvalidArgumentException('Could not find author with the ID');

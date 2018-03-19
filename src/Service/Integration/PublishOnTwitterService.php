@@ -22,7 +22,7 @@ class PublishOnTwitterService
     /**
      * PublishOnTwitterService constructor.
      * @param TwitterOAuth $twitter
-     * @param Router $router
+     * @param UrlGeneratorInterface $router
      */
     public function __construct(TwitterOAuth $twitter, UrlGeneratorInterface $router)
     {

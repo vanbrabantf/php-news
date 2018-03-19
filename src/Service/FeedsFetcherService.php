@@ -35,6 +35,14 @@ class FeedsFetcherService
             $xml = new \SimpleXmlElement($content);
             $blogId = $feed['id'];
 
+            if (!is_array($xml->channel->item)) {
+                if ($xml->channel->item instanceof \SimpleXMLElement) {
+                    $this->addEntry($xml->channel->item, $blogId);
+                }
+
+                continue;
+            }
+
             foreach($xml->channel->item as $entry) {
                 $this->addEntry($entry, $blogId);
             }
@@ -47,6 +55,15 @@ class FeedsFetcherService
      */
     public function addEntry($entry, $blogId): void
     {
+        $found = $this->em->getRepository(BlogPost::class)
+            ->findBy([
+                'url' => $entry->link,
+            ]);
+
+        if (count($found)) {
+            return;
+        }
+
         $pubDate = new \DateTimeImmutable((string)$entry->pubDate);
         $post = new BlogPost($entry->title, $blogId, $entry->link, $pubDate,null);
 

@@ -69,7 +69,7 @@ class CreatorService
         }
 
         $this->entityManager->flush();
-        $edition = new Edition($editionName, $posts);
+        $edition = new Edition($entityEdition->getId(), $editionName, $posts);
 
         $this->eventDispatcher->dispatch('edition.published', new EditionCreatedEvent($edition));
 

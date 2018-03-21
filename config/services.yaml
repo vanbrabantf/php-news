@@ -51,3 +51,16 @@ services:
 
     App\Repository\EditionRepository:
       public: true
+
+    # integrations
+
+    Abraham\TwitterOAuth\TwitterOAuth:
+      arguments:
+        - '%integration_twitter_consumer_key%'
+        - '%integration_twitter_consumer_secret%'
+        - '%integration_twitter_oauth_token%'
+        - '%integration_twitter_oauth_secret%'
+    App\Event\Listener\PublishOnTwitterNewEditionListener:
+      tags:
+        - { name: kernel.event_listener, event: edition.published }
+

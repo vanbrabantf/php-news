@@ -31,5 +31,5 @@ app:
     - id: za-warstwa-abstrakcji
       feedUrl: https://zawarstwaabstrakcji.pl/atom.xml
       author: Norbert Orzechowicz
-      name: za-warstwa-abstrakcji
+      name: Za Warstwą Abstrakcji
       twitter: norzechowicz

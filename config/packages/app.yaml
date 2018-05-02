@@ -28,3 +28,8 @@ app:
       feedUrl: http://feeds.fabien.potencier.org/aidedecamp?format=xml
       name: Fabien Potencier
       author: Fabien Potencier
+    - id: za-warstwa-abstrakcji
+      feedUrl: https://zawarstwaabstrakcji.pl/atom.xml
+      author: Norbert Orzechowicz
+      name: za-warstwa-abstrakcji
+      twitter: norzechowicz

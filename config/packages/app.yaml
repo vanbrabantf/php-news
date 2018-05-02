@@ -6,12 +6,12 @@ app:
     oauthSecret: '%env(TWITTER_OAUTH_SECRET)%'
 
   feeds:
-    - id: iamcodeguru
-      feedUrl: https://iamcode.guru/feed
-      name: I Am Code Guru
+    - id: developer20
+      feedUrl: https://developer20.com/feed
+      name: Developer 2.0 blog
       author: Bartłomiej Kiełbasa
       twitter: https://twitter.com/kabanek
-      facebook: https://www.facebook.com/iamcodeguru/
+      facebook: https://www.facebook.com/developer.two.zero/
     - id: laravel-news
       feedUrl: https://feed.laravel-news.com/
       name: Laravel News
